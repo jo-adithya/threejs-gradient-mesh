@@ -12,11 +12,11 @@ export class Renderer extends THREE.WebGLRenderer {
   }
 
   private initializeRenderer() {
-    this.toneMapping = THREE.CineonToneMapping;
+    this.toneMapping = THREE.LinearToneMapping;
     this.toneMappingExposure = 1;
     this.shadowMap.enabled = true;
     this.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.setClearColor("#000000");
+    this.setClearColor(0x000000, 0);
     this.onWindowResize();
   }
 

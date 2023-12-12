@@ -4,32 +4,64 @@ import { Experience } from "Experience";
 export class Environment {
   private readonly experience = Experience.getInstance();
   private readonly debug = this.experience.debug;
-  private sunLight!: THREE.DirectionalLight;
+  private whiteLight!: THREE.DirectionalLight;
+  private yellowLight!: THREE.DirectionalLight;
+  private redLight!: THREE.DirectionalLight;
+  private ambientLight!: THREE.AmbientLight;
 
   constructor() {
-    this.setSunLight();
+    this.setAmbientLight();
+    this.setLights();
     this.debugSetup();
   }
 
-  setSunLight() {
-    this.sunLight = new THREE.DirectionalLight("#ffffff", 1);
-    this.sunLight.castShadow = true;
-    this.sunLight.shadow.camera.far = 15;
-    this.sunLight.shadow.mapSize.set(1024, 1024);
-    this.sunLight.shadow.normalBias = 0.05;
-    this.sunLight.position.set(3, 3, -2.25);
-    this.experience.add(this.sunLight);
+  setLights() {
+    // White Light
+    this.whiteLight = new THREE.DirectionalLight(0xffffff, 3);
+    this.whiteLight.position.set(5, 5, -5);
+    
+    // Yellow Light
+    this.yellowLight = new THREE.DirectionalLight(0xFFD8BD, 3.4);
+    
+    // Red Light
+    this.redLight = new THREE.DirectionalLight(0xFF81A9, 3.8);
+    this.yellowLight.position.set(5, -2, 2);
+    this.redLight.position.set(-2.1, 5, 3.6);
+
+    this.experience.add(this.whiteLight);
+    this.experience.add(this.yellowLight);
+    this.experience.add(this.redLight);
+  }
+
+  setAmbientLight() {
+    this.ambientLight = new THREE.AmbientLight(0xffffff, 0);
+    this.experience.add(this.ambientLight);
   }
 
   debugSetup() {
     if (!this.debug.active) return;
 
-    const debugFolder = this.debug.gui?.addFolder("environment");
+    const debugFolder = this.debug.gui?.addFolder("Environment");
+    const whiteLightFolder = debugFolder?.addFolder("White Light");
+    const yellowLightFolder = debugFolder?.addFolder("Yellow Light");
+    const redLightFolder = debugFolder?.addFolder("Red Light");
 
-    // Sun Light
-    debugFolder?.add(this.sunLight, "intensity", 0, 10, 0.01).name("Sunlight Intensity");
-    debugFolder?.add(this.sunLight.position, "x", -5, 5, 0.01).name("Sunlight posX");
-    debugFolder?.add(this.sunLight.position, "y", -5, 5, 0.01).name("Sunlight posY");
-    debugFolder?.add(this.sunLight.position, "z", -5, 5, 0.01).name("Sunlight posZ");
+    // White Light
+    whiteLightFolder?.add(this.whiteLight, "intensity", 0, 10, 0.1).name("White Light Intensity");
+    whiteLightFolder?.add(this.whiteLight.position, "x", -5, 5, 0.1).name("White Light posX");
+    whiteLightFolder?.add(this.whiteLight.position, "y", -5, 5, 0.1).name("White Light posY");
+    whiteLightFolder?.add(this.whiteLight.position, "z", -5, 5, 0.1).name("White Light posZ");
+
+    // Yellow Light
+    yellowLightFolder?.add(this.yellowLight, "intensity", 0, 10, 0.1).name("Yellow Light Intensity");
+    yellowLightFolder?.add(this.yellowLight.position, "x", -5, 5, 0.1).name("Yellow Light posX");
+    yellowLightFolder?.add(this.yellowLight.position, "y", -5, 5, 0.1).name("Yellow Light posY");
+    yellowLightFolder?.add(this.yellowLight.position, "z", -5, 5, 0.1).name("Yellow Light posZ");
+
+    // Red Light
+    redLightFolder?.add(this.redLight, "intensity", 0, 10, 0.1).name("Red Light Intensity");
+    redLightFolder?.add(this.redLight.position, "x", -5, 5, 0.1).name("Red Light posX");
+    redLightFolder?.add(this.redLight.position, "y", -5, 5, 0.1).name("Red Light posY");
+    redLightFolder?.add(this.redLight.position, "z", -5, 5, 0.1).name("Red Light posZ");
   }
 }

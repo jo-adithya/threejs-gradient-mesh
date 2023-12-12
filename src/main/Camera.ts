@@ -29,6 +29,7 @@ export class Camera extends THREE.PerspectiveCamera {
   private initializeControls() {
     this.controls = new OrbitControls(this, this.canvas);
     this.controls.enableDamping = true;
+    this.controls.enabled = false;
   }
 
   onWindowResize() {

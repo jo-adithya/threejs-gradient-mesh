@@ -26,3 +26,13 @@ body {
   left: 0;
   outline: none;
 }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: hsla(25, 58%, 69%, 1);
+  background: linear-gradient(90deg, hsla(25, 58%, 69%, 1) 0%, hsla(341, 62%, 52%, 1) 100%);
+  background: -moz-linear-gradient(90deg, hsla(25, 58%, 69%, 1) 0%, hsla(341, 62%, 52%, 1) 100%);
+  background: -webkit-linear-gradient(90deg, hsla(25, 58%, 69%, 1) 0%, hsla(341, 62%, 52%, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#DDA881", endColorstr="#D03868", GradientType=1 );
+}

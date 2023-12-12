@@ -36,7 +36,7 @@ export class Experience extends THREE.Scene {
     this.renderer = new Renderer(canvas);
 
     // Axes Helper
-    this.axesHelper = new THREE.AxesHelper(1);
+    this.axesHelper = new THREE.AxesHelper(5);
     this.add(this.axesHelper);
 
     // World
